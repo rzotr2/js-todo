@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script defer type="module" src="JS/index.js"></script>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="container">
+    <div class="todo-body">
+        <div class="todo-body__row">
+            <h1 class="todo-body__title" id="todoTitle">That`s your TODO list!</h1>
+            <h2 class="todo-form__description">Add some tasks</h2>
+            <form class="todo-row__form" id="form" autocomplete="off">
+                <label for="formInput"></label>
+                <input name="formInput" type="text" class="todo-form__input" id="formInput" placeholder="Enter new task...">
+                <button class="todo-form__button" id="formButton" type="submit">Click Me</button>
+            </form>
+            <div class="todo-row">
+                <ul class="todo-row__list-new" id="todoList">
+                </ul>
+                <ul class="todo-row__list-completed">
+                    <li class="todo-list__item">
+                        <div class="todo-list__item-container">
+                            <input type="checkbox" class="todo-list__item-checkbox" id="input-checkbox" checked="checked">
+                            <label for="input-checkbox" class="todo-list__text">dsdsdsdsitem</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

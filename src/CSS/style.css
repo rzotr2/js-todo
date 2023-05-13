@@ -179,52 +179,16 @@ body {
 
 }
 
-.todo-list__buttons {
-    display: flex;
 
-    margin-left: 10px;
-}
-
-.todo-list__submit-button {
-    background-color:#0a0a23;
-    color: #fff;
-
-    border:none;
-    border-radius:10px;
-
-    padding: 4px 12px;
-    margin-right: 2px;
-
-    min-height:5px;
-    min-width: 50px;
-}
-
-.todo-list__submit-button:hover {
-    background-color:#002ead;
-    transition: 0.7s;
-}
-
-.todo-list__submit-button:focus {
-    outline-color: transparent;
-    outline-style:solid;
-    box-shadow: 0 0 0 1px #5a01a7;
-    transition: 0.7s;
-}
-
-.todo-list__submit-button:active {
-    background-color: #ffbf00;
-}
 
 .todo-list__delete-button{
-    padding: 4px 13px;
+    padding: 1px 7px 2px 7px;
 
     cursor: pointer;
 
     border:none;
-    border-radius:10px;
-    min-height:5px;
+    border-radius: 4px;
 
-    min-width: 50px;;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
     background: #e62222;
 

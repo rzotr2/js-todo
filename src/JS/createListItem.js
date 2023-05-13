@@ -16,15 +16,20 @@ const createListItem = (todo) => {
             </label>
             <span class="tooltipText">${todo.title}</span>
         </div>
-        <div class="todo-list__buttons">
-            <button class="todo-list__submit-button">Submit</button>
-            <button class="todo-list__delete-button js-delete-button">Delete</button>
+        <div class="todo-list__button">
+            <button class="todo-list__delete-button js-delete-button">
+                <span class="todo-list__symbol-delete">&#x2716;</span>
+            </button>
         </div>
     `;
 
-    listNew.appendChild(listItem);
+    if (todo.completed) {
+        listCompleted.appendChild(listItem);
+    } else {
+        listNew.appendChild(listItem);
+    }
+
     addListeners(listItem, todo);
-    return listItem;
 };
 
 const addListeners = (listItem, todo) => {
@@ -39,12 +44,10 @@ const addListeners = (listItem, todo) => {
             listItem.remove();
             listCompleted.appendChild(listItem);
             localStorageService.updateTodo(todo);
-            console.log(todo.completed)
         } else if (!todo.completed) {
             listItem.remove();
             listNew.appendChild(listItem);
             localStorageService.updateTodo(todo);
-            console.log(todo.completed);
         }
     });
 

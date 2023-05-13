@@ -1,6 +1,7 @@
 import localStorageService from "./localStorageService.js";
 
-const list = document.querySelector('#todoList');
+const listNew = document.querySelector('#todoListNew');
+const listCompleted = document.querySelector('#todoListCompleted');
 
 const createListItem = (todo) => {
     const listItem = document.createElement('li');
@@ -21,8 +22,9 @@ const createListItem = (todo) => {
         </div>
     `;
 
-    list.appendChild(listItem);
+    listNew.appendChild(listItem);
     addListeners(listItem, todo);
+    return listItem;
 };
 
 const addListeners = (listItem, todo) => {
@@ -33,7 +35,17 @@ const addListeners = (listItem, todo) => {
 
     checkbox.addEventListener('change', (event) => {
         todo.completed = event.target.checked;
-        localStorageService.updateTodo(todo);
+        if (todo.completed) {
+            listItem.remove();
+            listCompleted.appendChild(listItem);
+            localStorageService.updateTodo(todo);
+            console.log(todo.completed)
+        } else if (!todo.completed) {
+            listItem.remove();
+            listNew.appendChild(listItem);
+            localStorageService.updateTodo(todo);
+            console.log(todo.completed);
+        }
     });
 
     deleteButton.addEventListener('click', () => {
@@ -42,7 +54,7 @@ const addListeners = (listItem, todo) => {
     });
 
     title.addEventListener('blur', (event) => {
-        if (event.target.textContent && event.target.textContent !== ' ') {
+        if (event.target.textContent.trim()) {
             todo.title = event.target.textContent;
             tooltipText.textContent = todo.title;
             localStorageService.updateTodo(todo);

@@ -17,7 +17,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 
 
 body {
-    background: url("/assets/bg-image.jpg") center 0 no-repeat;
+    background: url("https://images.unsplash.com/photo-1680955886049-ce69173143bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80") center 0 no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -102,16 +102,24 @@ body {
     justify-content: space-around;
 }
 
-.todo-row__list-completed {
-    background-color: whitesmoke;
-
-    width: 49%;
-
-}
-
 .todo-row__list-new {
     background-color: whitesmoke;
-    width: 49%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+
+    width: 49.5%;
+
+    align-self: flex-start;
+}
+
+.todo-row__list-completed {
+    background-color: whitesmoke;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+    width: 49.5%;
+
+    align-self: flex-start;
 }
 
 .todo-list__item {

@@ -1,4 +1,4 @@
-import localStorageService from "./localStorageService.js";
+import * as restService from "./restService.js";
 
 const listNew = document.querySelector('#todoListNew');
 const listCompleted = document.querySelector('#todoListCompleted');
@@ -41,31 +41,32 @@ const addListeners = (listItem, todo) => {
     checkbox.addEventListener('change', (event) => {
         todo.completed = event.target.checked;
         if (todo.completed) {
-            listItem.remove();
-            listCompleted.appendChild(listItem);
-            localStorageService.updateTodo(todo);
+            restService.updateTodo(todo).then(() => {
+                listItem.remove();
+                listCompleted.appendChild(listItem);
+            });
         } else if (!todo.completed) {
-            listItem.remove();
-            listNew.appendChild(listItem);
-            localStorageService.updateTodo(todo);
+            restService.updateTodo(todo).then(() => {
+                listItem.remove();
+                listNew.appendChild(listItem);
+            });
         }
     });
 
     deleteButton.addEventListener('click', () => {
-        localStorageService.deleteTodo(todo.id);
-        listItem.remove();
+        restService.removeTodo(todo.id).then(() => listItem.remove());
     });
 
     title.addEventListener('blur', (event) => {
         if (event.target.textContent.trim()) {
             todo.title = event.target.textContent;
-            tooltipText.textContent = todo.title;
-            localStorageService.updateTodo(todo);
-        } else {
-            const actualTitle = localStorageService.getTodo(todo.id).title;
 
-            event.target.textContent = actualTitle;
-            tooltipText.textContent = actualTitle;
+            restService.updateTodo(todo).then(() => {
+                tooltipText.textContent = todo.title;
+            });
+        } else {
+            event.target.textContent = todo.title;
+            tooltipText.textContent = todo.title;
         }
     });
 };

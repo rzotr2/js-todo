@@ -1,8 +1,7 @@
 import utils from "./utils.js";
-import {
-    createTodo,
-} from "./localStorageService.js";
 import createListItem from "./createListItem.js";
+import * as restService from "./restService.js";
+import * as todoModelsService from "./todoModelsService.js";
 
 const initForm = () => {
     const form = document.querySelector('#form');
@@ -12,9 +11,9 @@ const initForm = () => {
         const formData = utils.getFormData(form);
 
         if (formData.formInput) {
-            const todoItem = createTodo(formData.formInput);
+            const todoModel = todoModelsService.createTodoModel(formData.formInput);
+            restService.createTodo(todoModel).then((res) => createListItem(res));
 
-            createListItem(todoItem);
             form.reset();
         }
     });

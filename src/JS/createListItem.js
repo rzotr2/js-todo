@@ -1,4 +1,5 @@
 import * as restService from "./restService.js";
+import * as loader from './loader.js';
 
 const listNew = document.querySelector('#todoListNew');
 const listCompleted = document.querySelector('#todoListCompleted');
@@ -32,6 +33,15 @@ const createListItem = (todo) => {
     addListeners(listItem, todo);
 };
 
+const updateTodoList = (todo, list, listItem) => {
+    restService.updateTodo(todo)
+        .then(() => {
+            listItem.remove();
+            list.appendChild(listItem);
+            loader.removeLoader();
+        });
+}
+
 const addListeners = (listItem, todo) => {
     const checkbox = listItem.querySelector('.js-todo-checkbox');
     const deleteButton = listItem.querySelector('.js-delete-button');
@@ -39,18 +49,22 @@ const addListeners = (listItem, todo) => {
     const tooltipText = listItem.querySelector('.tooltipText');
 
     checkbox.addEventListener('change', (event) => {
+        loader.addLoader();
         todo.completed = event.target.checked;
-        if (todo.completed) {
-            restService.updateTodo(todo).then(() => {
-                listItem.remove();
-                listCompleted.appendChild(listItem);
-            });
-        } else if (!todo.completed) {
-            restService.updateTodo(todo).then(() => {
-                listItem.remove();
-                listNew.appendChild(listItem);
-            });
-        }
+        // if (todo.completed) {
+        //     restService.updateTodo(todo).then(() => {
+        //         listItem.remove();
+        //         listCompleted.appendChild(listItem);
+        //     });
+        // } else {
+        //     restService.updateTodo(todo).then(() => {
+        //         listItem.remove();
+        //         listNew.appendChild(listItem);
+        //     });
+        // }
+
+        const currentList = todo.completed ? listCompleted : listNew;
+        updateTodoList(todo, currentList, listItem);
     });
 
     deleteButton.addEventListener('click', () => {

@@ -1,10 +1,12 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
 /*Обнуление*/
 *{padding: 0;margin: 0;border: 0;}
 *,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;}
 :focus,:active{outline: none;}
 a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
-html,body{height: 100%;width: 100%;font-size: 100%;line-height: 1;font-size: 14px;
+html,body{height: 100%;width: 100%;line-height: 1;font-size: 14px;
     -ms-text-size-adjust: 100%;-moz-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
 input,button,textarea{font-family:inherit;}input::-ms-clear{display:none;}
 button{cursor: pointer;} button::-moz-focus-inner {padding:0;border:0;}
@@ -14,8 +16,6 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 /*--------------------*/
 
 
-
-
 body {
     background: url("https://images.unsplash.com/photo-1680955886049-ce69173143bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80") center 0 no-repeat;
     background-size: cover;
@@ -23,6 +23,7 @@ body {
 }
 
 .loader-container {
+    z-index: 11;
     position: fixed;
     height: 100%;
     width: 100%;
@@ -32,6 +33,7 @@ body {
 }
 
 .loader {
+    z-index: 12;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -207,9 +209,57 @@ body {
 
 }
 
+.todo-list__button {
+    display: flex;
+}
 
+.todo-list__button button:not(:last-child) {
+    margin-right: 5px;
+}
 
-.todo-list__delete-button{
+.todo-list__edit-button {
+    padding: 1px 6px 2px 6px;
+
+    cursor: pointer;
+
+    border:none;
+    border-radius: 4px;
+
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: hsl(144,60%,52%);
+}
+
+.todo-list__edit-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.todo-list__edit-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -10px;
+    transition: 0.5s;
+}
+
+.todo-list__edit-button:hover span {
+    padding-right: 15px;
+}
+
+.todo-list__edit-button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/*dsdsdsdsdsdsd*/
+
+.todo-list__delete-button {
     padding: 1px 7px 2px 7px;
 
     cursor: pointer;
@@ -220,6 +270,7 @@ body {
     box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
     background: #e62222;
 
+
 }
 
 .todo-list__delete-button:hover {
@@ -229,3 +280,143 @@ body {
 .todo-list__delete-button:focus {
     outline: none;
 }
+
+.todo-list__delete-button span {
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.5s;
+    position: relative;
+
+    overflow: hidden;
+    vertical-align: middle;
+
+}
+
+.todo-list__delete-button span:after {
+    content: 'DELETE?';
+    position: absolute;
+    opacity: 0;
+    top: 2px;
+    right: -25px;
+    transition: 0.3s;
+}
+
+.todo-list__delete-button:hover span {
+    padding-right: 60px;
+}
+
+.todo-list__delete-button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/*DIALOG MODAL WINDOW STYLES*/
+
+.overlay {
+    z-index: 10;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-color: hsla(0, 0%, 0%, 0.6);
+
+    height: 100%;
+    width: 100%;
+}
+
+.dialog {
+    z-index: 10;
+    display: inline-block;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: #fff;
+    border-radius: 10px;
+
+    width: 100%;
+    max-width: 350px;
+}
+
+.dialog-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px 10px 5px 10px;
+}
+
+.dialog-header__title {
+    font-size: 1.7rem;
+}
+
+.dialog-header__close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background-color: unset;
+}
+
+.dialog-body {
+    padding: 10px;
+}
+
+.dialog-body__form-group:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.dialog-body__form-label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dialog-body__form-input {
+    display: block;
+
+    width: 100%;
+    resize: none;
+
+    border: 1px solid #7c7b7b;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.dialog-body__form-textarea {
+    min-height: 70px;
+}
+
+.dialog-footer {
+    padding: 10px;
+}
+
+.dialog-footer__btn-group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-group__discard-btn {
+    display: inline-block;
+
+    background-color: #E53E3E;
+
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.btn-group__apply-btn {
+    display: inline-block;
+
+    background-color: #319795;
+
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.dialog-footer__btn-group > button:not(:last-child) {
+    margin-right: 10px;
+}
+/*DIALOG MODAL WINDOW STYLES*/
